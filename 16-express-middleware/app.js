@@ -7,6 +7,12 @@ const port = 3000
 app.set('view engine', 'ejs')
 // ejs-layouts
 app.use(expressLayouts)
+
+// application level middleware
+app.use((req, res, next) => {
+    console.log('Time: ', Date.now())
+    next()
+})
   
 app.get('/', (req, res) => {
     // res.sendFile('./index.html', {root: __dirname})
@@ -33,14 +39,6 @@ app.get('/', (req, res) => {
     })
 })
 
-// app.get('/', (req, res) => {
-//     res.render('index', {
-//         nama: 'Fadilah',
-//         layout: 'layouts/main-layout', 
-//         title: 'Halaman Home'
-//     })
-// })
-
 app.get('/about', (req, res) => {
     res.render('about', {
         layout: 'layouts/main-layout', 
@@ -54,10 +52,6 @@ app.get('/contact', (req, res) => {
         title: 'Halaman Contact'
     })
 })
-
-// app.get('/product/:id', (req, res) => {
-//     // res.send(`Product ID : ${req.params.id}  <br> Caregory ID : ${req.query.category}`)
-// })
 
 // metode untuk menjalankan middleware
 app.use('/', (req, res) => {
