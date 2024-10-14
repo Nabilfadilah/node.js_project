@@ -1,6 +1,6 @@
 const express = require('express')
 const expressLayouts = require('express-ejs-layouts')
-const { loadContact } = require('./utils/contacts')
+const { loadContact, findContact } = require('./utils/contacts')
 const app = express()
 const port = 3000
 
@@ -13,8 +13,8 @@ app.use(expressLayouts) // ejs-layouts
 // built-in middleware
 app.use(express.static('public'))
 
+// home
 app.get('/', (req, res) => {
-    // res.sendFile('./index.html', {root: __dirname})
     const mahasiswa = [
         {
             nama: 'galih',
@@ -38,6 +38,7 @@ app.get('/', (req, res) => {
     })
 })
 
+// about
 app.get('/about', (req, res) => {
     res.render('about', {
         layout: 'layouts/main-layout', 
@@ -45,6 +46,7 @@ app.get('/about', (req, res) => {
     })
 })
 
+// contact
 app.get('/contact', (req, res) => {
     const contacts = loadContact()
 
@@ -52,6 +54,16 @@ app.get('/contact', (req, res) => {
         layout: 'layouts/main-layout', 
         title: 'Halaman Contact',
         contacts
+    })
+})
+
+app.get('/contact/:nama', (req, res) => {
+    const contact = findContact(req.params.nama)
+
+    res.render('detail', {
+        layout: 'layouts/main-layout', 
+        title: 'Halaman Detail Contact',
+        contact
     })
 })
 
