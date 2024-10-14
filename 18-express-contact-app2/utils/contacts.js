@@ -26,4 +26,16 @@ const findContact = (nama) => {
     return contact
 }
 
-module.exports = {loadContact, findContact}
+// method menuliskan atau menimpa file contacts.jspn dengan data yang baru
+const saveContacts = (contacts) => {
+    fs.writeFileSync('data/contacts.json', JSON.stringify(contacts))
+}
+
+// menambahkan data contact baru
+const addContact = (contact) => {
+    const contacts = loadContact()
+    contacts.push(contact)
+    saveContacts(contacts)
+}
+
+module.exports = {loadContact, findContact, addContact}
