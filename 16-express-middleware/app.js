@@ -8,6 +8,9 @@ app.set('view engine', 'ejs')
 // ejs-layouts
 app.use(expressLayouts)
 
+// built-in middleware
+app.use(express.static('public'))
+
 // application level middleware
 app.use((req, res, next) => {
     console.log('Time: ', Date.now())
