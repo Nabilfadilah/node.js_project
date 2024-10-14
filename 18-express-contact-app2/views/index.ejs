@@ -1,0 +1,15 @@
+
+    <!-- mencetak sebuah variabel -->
+    <h1>Helllloooooooooo NGabbbbbb</h1>
+    <h2>Selamat siang warga indo <%= nama%></h2>
+
+    <h4>Daftar Mahasiswa</h4>
+    <% if (mahasiswa.length < 1) { %>
+    <p>Data Mahasiswa masih kosong.</p>
+    <% } else { %> <% mahasiswa.forEach(mhs => { %>
+        <ul>
+            <li>Nama : <%= mhs.nama %></li>
+            <li>Email : <%= mhs.email %></li>
+        </ul>
+    <% }) %> <% } %>
+
